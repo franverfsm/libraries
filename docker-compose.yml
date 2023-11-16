@@ -13,7 +13,7 @@ services:
     working_dir: /var/www/
     volumes:
       - ./src:/var/www:rw
-      - ./.docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./.docker/php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - laravelapp
 
