@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
 use App\Services\BookService;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 final class BookDeleteController extends Controller
 {
@@ -13,13 +13,10 @@ final class BookDeleteController extends Controller
     ) {
     }
 
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $id): Response
     {
         $this->bookService->deleteBook($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Deleted book',
-        ], 204);
+        return response()->noContent();
     }
 }

@@ -12,8 +12,11 @@ final class BookService
     ) {
         $this->builderBook = Book::query();
     }
-    public function listBooks(): Builder
+
+    public function listBooks(array $filter): Builder
     {
+        $this->setFilters($filter);
+
         return $this->builderBook;
     }
 
@@ -43,5 +46,30 @@ final class BookService
         $book = $this->builderBook->find($id);
 
         return $book->delete();
+    }
+
+    private function setFilters(array $filter): void
+    {
+        if (!empty($filter['title'])) {
+            $this->builderBook->where('title', 'LIKE', '%' . $filter['title'] . '%');
+        }
+
+        if (!empty($filter['description'])) {
+            $this->builderBook->where('description', 'LIKE', '%' . $filter['description'] . '%');
+        }
+
+        if (!empty($filter['author'])) {
+            $this->builderBook->where('author', 'LIKE', '%' . $filter['author'] . '%');
+        }
+
+        if (!empty($filter['pages'])) {
+            $this->builderBook->where('pages', '=', $filter['pages']);
+        }
+
+        if (!empty($filter['heap_id'])) {
+            $this->builderBook->whereHas('head', function (Builder $builder) use ($filter): void {
+                $builder->whereIn('heap_id', $filter['heap_id']);
+            });
+        }
     }
 }

@@ -16,11 +16,13 @@ final class BookListController extends Controller
 
     public function __invoke(FilterBookRequest $request): JsonResponse
     {
-        $books = $this->bookService->listBooks();
+        $books = $this->bookService->listBooks($request->toArray());
+        $perPage = $request->get('per_page', 15);
+        $page = $request->get('page', 1);
 
         return response()->json([
             'success' => true,
-            'data' => $books->paginate(),
+            'data' => $books->paginate(perPage: $perPage, page: $page),
         ]);
     }
 }

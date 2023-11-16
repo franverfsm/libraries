@@ -16,22 +16,29 @@ class FilterBookRequest extends FormRequest
     {
         return [
             'title' => [
-                'sometimes',
+                'nullable',
                 'string',
                 'max:255',
             ],
             'description' => [
-                'sometimes',
+                'nullable',
                 'string',
                 'max:255',
             ],
             'author' => [
-                'sometimes',
+                'nullable',
                 'string',
                 'max:255',
             ],
             'pages' => [
-                'sometimes',
+                'nullable',
+                'integer',
+            ],
+            'heap_id' => [
+                'nullable',
+                'array',
+            ],
+            'heap_id.*' => [
                 'integer',
             ],
         ];

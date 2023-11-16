@@ -18,9 +18,12 @@ final class HeapListController extends Controller
     {
         $heaps = $this->heapService->listHeaps();
 
+        $perPage = $request->get('per_page', 15);
+        $page = $request->get('page', 1);
+
         return response()->json([
             'success' => true,
-            'data' => $heaps->paginate(),
+            'data' => $heaps->paginate(perPage: $perPage, page: $page),
         ]);
     }
 }
