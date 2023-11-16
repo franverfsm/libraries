@@ -12,13 +12,15 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
-      - ./src:/var/www
+      - ./src:/var/www:rw
       - ./.docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     networks:
       - laravelapp
 
   db:
-    image: mysql:5.7
+    image: mysql:8
+    ports:
+      - "127.0.0.1:3306:3306"
     container_name: laravelapp-db
     restart: unless-stopped
     environment:
@@ -27,7 +29,7 @@ services:
       MYSQL_PASSWORD: 'libraries'
       MYSQL_USER: 'libraries_user'
     volumes:
-      - ~/.mysql:/var/lib/mysql
+      - ~/.mysql:/var/lib/mysql:rw
       - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - laravelapp
@@ -39,7 +41,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./src:/var/www
+      - ./src:/var/www:rw
       - ./.docker/nginx:/etc/nginx/conf.d
     networks:
       - laravelapp
