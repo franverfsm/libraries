@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Book\FilterBookRequest;
 use App\Services\BookService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 final class BookListController extends Controller
 {
@@ -14,7 +14,7 @@ final class BookListController extends Controller
     ) {
     }
 
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(FilterBookRequest $request): JsonResponse
     {
         $books = $this->bookService->listBooks();
 
