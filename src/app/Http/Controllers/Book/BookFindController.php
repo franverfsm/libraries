@@ -19,7 +19,7 @@ final class BookFindController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $book
+            'data' => $book,
         ]);
     }
 }

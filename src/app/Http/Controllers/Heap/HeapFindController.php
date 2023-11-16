@@ -19,7 +19,7 @@ final class HeapFindController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $heap
+            'data' => $heap,
         ]);
     }
 }

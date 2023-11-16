@@ -13,10 +13,10 @@ final class Book extends Model
     use SoftDeletes;
 
     protected $fillable = [
-       'title',
-       'description',
-       'author',
-       'pages',
+        'title',
+        'description',
+        'author',
+        'pages',
     ];
 
     protected $casts = [

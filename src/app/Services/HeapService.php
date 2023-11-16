@@ -12,6 +12,7 @@ final class HeapService
     ) {
         $this->builderHeap = Heap::query();
     }
+
     public function listHeaps(): Builder
     {
         return $this->builderHeap;
