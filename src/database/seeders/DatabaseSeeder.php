@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
          User::factory(10)->create();
          Heap::factory(35)->create();
-         Book::factory(500)->create();
+         Book::factory(50)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
