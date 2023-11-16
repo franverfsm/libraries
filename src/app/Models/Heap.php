@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 final class Heap extends Model
 {
@@ -22,4 +23,9 @@ final class Heap extends Model
     protected $casts = [
         'cep' => 'integer',
     ];
+
+    public function book(): BelongsToMany
+    {
+        return $this->belongsToMany(Book::class, 'heap_book', 'heap_id', 'book_id');
+    }
 }
