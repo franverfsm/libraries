@@ -10,6 +10,7 @@ use App\Http\Controllers\Heap\HeapDeleteController;
 use App\Http\Controllers\Heap\HeapFindController;
 use App\Http\Controllers\Heap\HeapListController;
 use App\Http\Controllers\Heap\HeapUpdateController;
+use App\Http\Controllers\Third\CepController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,8 @@ Route::post('heaps', HeapCreateController::class);
 Route::get('heap/{id}', HeapFindController::class);
 Route::put('heap/{id}', HeapUpdateController::class);
 Route::delete('heap/{id}', HeapDeleteController::class);
+
+Route::get('cep/{cepNumber}', CepController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

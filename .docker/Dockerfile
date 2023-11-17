@@ -21,6 +21,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd \
     && docker-php-source delete
 
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
