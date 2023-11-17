@@ -25,19 +25,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('books', BookListController::class);
-Route::post('books', BookCreateController::class);
-Route::get('book/{id}', BookFindController::class);
-Route::put('book/{id}', BookUpdateController::class);
-Route::delete('book/{id}', BookDeleteController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('books', BookListController::class);
+    Route::post('books', BookCreateController::class);
+    Route::get('book/{id}', BookFindController::class);
+    Route::put('book/{id}', BookUpdateController::class);
+    Route::delete('book/{id}', BookDeleteController::class);
 
-Route::get('heaps', HeapListController::class);
-Route::post('heaps', HeapCreateController::class);
-Route::get('heap/{id}', HeapFindController::class);
-Route::put('heap/{id}', HeapUpdateController::class);
-Route::delete('heap/{id}', HeapDeleteController::class);
+    Route::get('heaps', HeapListController::class);
+    Route::post('heaps', HeapCreateController::class);
+    Route::get('heap/{id}', HeapFindController::class);
+    Route::put('heap/{id}', HeapUpdateController::class);
+    Route::delete('heap/{id}', HeapDeleteController::class);
 
-Route::get('cep/{cepNumber}', CepController::class);
+    Route::get('cep/{cepNumber}', CepController::class);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
