@@ -25,6 +25,11 @@ final class HeapService
 
     public function createHeap(array $dataBook)
     {
+        $heap = $this->builderHeap->create($dataBook);
+
+        if (!empty($dataBook['heap_ids']) && $heap) {
+            $heap->book()->sync($dataBook['heap_ids']);
+        }
         return $this->builderHeap->create($dataBook);
     }
 
@@ -33,6 +38,10 @@ final class HeapService
         $heap = $this->builderHeap->findOrFail($id);
 
         $heap->update($dataBook);
+
+        if (isset($dataBook['book_ids'])) {
+            $heap->book()->sync($dataBook['book_ids']);
+        }
 
         return $heap;
     }

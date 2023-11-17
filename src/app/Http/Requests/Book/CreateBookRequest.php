@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Book;
 
+use App\Models\Heap;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 final class CreateBookRequest extends FormRequest
 {
@@ -37,6 +39,15 @@ final class CreateBookRequest extends FormRequest
             ],
             'pages' => [
                 'required',
+                'integer',
+            ],
+            'heap_ids' => [
+                'nullable',
+                'array',
+                'min:1',
+                Rule::exists(Heap::class, 'id'),
+            ],
+            'heap_ids.*' => [
                 'integer',
             ],
         ];

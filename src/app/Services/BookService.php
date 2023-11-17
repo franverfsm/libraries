@@ -29,6 +29,10 @@ final class BookService
     {
         $book = $this->builderBook->create($dataBook);
 
+        if (!empty($dataBook['heap_ids']) && $book) {
+            $book->heap()->sync($dataBook['heap_ids']);
+        }
+
         return $book;
     }
 
@@ -37,6 +41,10 @@ final class BookService
         $book = $this->builderBook->findOrFail($id);
 
         $book->update($dataBook);
+
+        if (isset($dataBook['heap_ids'])) {
+            $book->heap()->sync($dataBook['heap_ids']);
+        }
 
         return $book;
     }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Heap;
 
+use App\Models\Book;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 final class UpdateHeapRequest extends FormRequest
 {
@@ -55,6 +57,14 @@ final class UpdateHeapRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:255',
+            ],
+            'book_ids' => [
+                'nullable',
+                'array',
+                Rule::exists(Book::class, 'id'),
+            ],
+            'book_ids.*' => [
+                'integer',
             ],
         ];
     }
